@@ -7,7 +7,7 @@ import EquipmentImage from '../assets/icons/equipment.png';
 
 const Detail = ({exerciseDetail}) => {
 
-    const {bodyPart, gifUrl, name, target, equiment}= exerciseDetail;
+    const {bodyPart, gifUrl, name, target, equipment}= exerciseDetail;
      
     const extraDetail=[
         {
@@ -20,7 +20,7 @@ const Detail = ({exerciseDetail}) => {
         },
         {
             icon: EquipmentImage,
-            name:equiment
+            name:equipment
         }
     ]
 
@@ -32,20 +32,23 @@ const Detail = ({exerciseDetail}) => {
 
       <Stack sx={{gap:{lg:"35px", xs:"20px"}}}>
 
-        <Typography>
+        <Typography variant='h3' textTransform={"capitalize"}>
             {name}
         </Typography>
-        <Typography>
+        <Typography variant='h5' >
             Exercises keep you strong. {name} {` `} is one of the best exercises to target your {target}.
             It will help you improve your mood and gain energy
             
         </Typography>
         {extraDetail.map((item)=>(
             <Stack key={item.name} direction={"row"} gap={"24px"} alignItems={"center"}>
-                <Button>
-                    <img src={item.icon}/>
+                <Button sx={{background:"#fff2b", borderRadius:"50%", width:"100px",
+            height:"100px"}}>
+                    <img src={item.icon} alt={bodyPart} style={{
+                        width:"50px",height:"50px" 
+                    }}/>
                 </Button>
-                <Typography variant='h5'>{item.name}</Typography>
+                <Typography textTransform={"capitalize"} variant='h5'>{item.name}</Typography>
             </Stack>
         ))}
         
