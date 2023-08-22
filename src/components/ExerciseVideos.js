@@ -1,9 +1,11 @@
 import React from 'react';
 import { Typography, Box, Stack } from '@mui/material';
+import '../components/Loader'
+import Loader from '../components/Loader';
 
 
 const ExerciseVideos = ({ exerciseVideos, name }) => {
-  if (!exerciseVideos.length) return "Loading";
+  if (!exerciseVideos.length) return <Loader/>;
 
   return (
     <Box sx={{ marginTop: { lg: '203px', xs: '20px' } }} p="20px">

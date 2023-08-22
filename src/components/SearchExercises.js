@@ -13,14 +13,24 @@ const SearchExercises = ({setExercises, setBodyPart,bodyPart}) => {
 
     useEffect(()=>{
       const fetchExercisesData=async()=>{
-        const bodyPartsData= await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList',exerciseOptions);
-        
-        setBodyParts(['all', ...bodyPartsData]);
-        
-      
+        try {
+          let bodyPartsData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions);
+    
+          if (Array.isArray(bodyPartsData)) {
+            setBodyParts(['all', ...bodyPartsData]);
+          } else {
+            console.error('bodyPartsData is not an array:', bodyPartsData);
+          }
+        } catch (error) {
+          console.error('Error fetching body parts data:', error);
+        }
       };
       fetchExercisesData();
-    }, [])
+    }, [setBodyParts]);
+        
+        
+      
+    
 
     const handleSearch= async()=>{
         if(search){

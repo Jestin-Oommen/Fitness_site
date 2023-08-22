@@ -14,7 +14,7 @@ const Exercises = ({exercises, setExercises, bodyPart}) => {
   const indexOfLastExercise=currentPage * exercisePerPage;
   const indexOfFirstExercise=indexOfLastExercise - exercisePerPage;
 
-  const currentExercises=exercises.slice(indexOfFirstExercise,indexOfLastExercise);
+  const currentExercises=exercises?.slice(indexOfFirstExercise,indexOfLastExercise);
 
   
   const paginate=(e,value)=>{
@@ -31,11 +31,13 @@ const Exercises = ({exercises, setExercises, bodyPart}) => {
       } else {
         exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, exerciseOptions);
       }
-      setExercises(exercisesData);
-      
+      if (Array.isArray(exercisesData)) {
+        setExercises(exercisesData);
+      };
+
     };
     fetchExercisesData();
-  }, [bodyPart]);
+  }, [bodyPart, setExercises]);
   
   return (
     <Box 
